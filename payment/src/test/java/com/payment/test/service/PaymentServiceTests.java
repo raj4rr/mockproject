@@ -1,6 +1,7 @@
 package com.payment.test.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,15 +35,21 @@ public class PaymentServiceTests {
 		payment.setOrderId(2);
 
 	}
-  @Test
+
+	@Test
 	public void doPayment() {
 
 		when(paymentRepository.save(payment)).thenReturn(payment);
-		System.out.println(paymentRepository);
-		System.out.println(paymentService);
 		Payment doPayment = paymentService.doPayment(payment);
-		System.out.println(doPayment);
 		assertThat(doPayment).isNotNull();
+	}
+
+	@Test
+	public void paymentProcessing() {
+		// when(paymentRepository.save(payment)).thenReturn(payment);
+		String str = paymentService.paymentProcessing(payment);
+		assertEquals("Success", str);
+		;
 	}
 
 }

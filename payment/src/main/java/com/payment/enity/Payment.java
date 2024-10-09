@@ -52,6 +52,11 @@ public class Payment {
 	public void setAmmount(double ammount) {
 		this.ammount = ammount;
 	}
+	@Override
+	public String toString() {
+		return "Payment [id=" + id + ", transactionId=" + transactionId + ", paymentStatus=" + paymentStatus
+				+ ", orderId=" + orderId + ", ammount=" + ammount + "]";
+	}
 	
 	
 	
