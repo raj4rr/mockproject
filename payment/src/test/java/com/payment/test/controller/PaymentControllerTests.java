@@ -15,9 +15,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.payment.enity.Payment;
 import com.payment.service.PaymentService;
-
-@SpringBootTest
 @AutoConfigureMockMvc
+@SpringBootTest
+
 public class PaymentControllerTests {
 	@Autowired
 	private MockMvc mockMvc;
