@@ -25,7 +25,7 @@ public class OrderService {
 		payment.setAmmount(order.getTotalPrice());
 		payment.setOrderId(order.getId());
 		// do Rest call to payment and pass the order id .
-		Payment paymentResponse = res.postForObject("http://payment/payment/dopayment", payment, Payment.class);
+		Payment paymentResponse = res.postForObject("http://PAYMENT/payment/dopayment", payment, Payment.class);
 		if (paymentResponse.getPaymentStatus().equals("Success"))
 			response = "Payment done";
 		else
