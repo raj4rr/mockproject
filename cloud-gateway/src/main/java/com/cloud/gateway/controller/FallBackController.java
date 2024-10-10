@@ -1,21 +1,24 @@
 package com.cloud.gateway.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+
+import reactor.core.publisher.Mono;
+
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
 public class FallBackController {
 
+	@RestController
+	public class FallbackController {
 	@RequestMapping("/orderFallBack")
-	public String orderFallBack(@RequestParam String param) {
-		return new String("Order servive taking too long ...Try agaian");
+	public Mono<String> orderServiceFallBack(){
+	    return Mono.just("Order Service is taking too long to respond or is down. Please try again later");
 	}
-
 	@RequestMapping("/paymentFallBack")
-	public String paymentFallBack(@RequestParam String param) {
-		return new String("Payment servive taking too long ...Try agaian");
+	public Mono<String> paymentServiceFallBack(){
+	    return Mono.just("Payment Service is taking too long to respond or is down. Please try again later");
+	}
 	}
 
 }

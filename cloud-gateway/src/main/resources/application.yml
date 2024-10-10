@@ -11,22 +11,29 @@ spring:
           filters:
             - name: CircuitBreaker
               args:
-                name: order
+                name: order-service
                 fallbackuri: forward:/orderFallBack
-        - id: payment-service
+        - id: payment
           uri: lb://PAYMENT
           predicates:
             - Path=/payment/**
           filters:
             - name: CircuitBreaker
               args:
-                name: payment
-                fallbackuri: forward:/paymentFallback
-                
+                name: payment-service
+                fallbackuri: forward:/paymentFallBack
 
 server:
   port: 8989
-  
+
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    hostname: localhost
 management:
   endpoints:
     web:
