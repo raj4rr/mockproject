@@ -24,10 +24,11 @@ public class PaymentService {
 	public String paymentProcessing(Payment payment) {
 		// api should be 3dr part party payment gateway( paypay,gpay etc)
 		if (payment.getAmmount() >= 1000)
-			return "false";
+			return "Failed";
 		if (payment.getAmmount() <= 200)
 			return "Success";
-		return new Random().nextBoolean() ? "Success" : "false";
+		else
+		return new Random().nextBoolean() ? "Success" : "Failed";
 	}
 
 }
