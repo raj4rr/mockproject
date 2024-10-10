@@ -12,7 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class RestTemplateClient {
 
 	@Bean
-	@LoadBalanced
+	//@LoadBalanced
 	public RestTemplate restTemplate(RestTemplateBuilder builder) {
 
 	    return builder.setConnectTimeout(Duration.ofMillis(300000))
