@@ -16,16 +16,18 @@ public class PaymentService {
 
 	public Payment doPayment(Payment payment) {
 		payment.setPaymentStatus(paymentProcessing(payment));
-			payment.setTransactionId(UUID.randomUUID().toString());
+		payment.setTransactionId(UUID.randomUUID().toString());
 		return paymentRepository.save(payment);
 	}
-	
+
 	//
 	public String paymentProcessing(Payment payment) {
-		//api should be 3dr part party payment gateway( paypay,gpay etc) 
-		if(payment.getAmmount()>=1000) return "false";
-		if(payment.getAmmount()<=200) return "Success";
-		return new Random().nextBoolean()?"Success":"false";
-}
+		// api should be 3dr part party payment gateway( paypay,gpay etc)
+		if (payment.getAmmount() >= 1000)
+			return "false";
+		if (payment.getAmmount() <= 200)
+			return "Success";
+		return new Random().nextBoolean() ? "Success" : "false";
+	}
 
 }
