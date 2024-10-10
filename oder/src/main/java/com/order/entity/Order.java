@@ -18,9 +18,8 @@ public class Order {
 	@Id
 	@GeneratedValue
 	private int id;
-//	@ManyToMany
-//	private List<Product> products;
 	private int quantity; 
+	String name;
 	@Column(name="total_price")
 	private double totalPrice;
 	public int getId() {
@@ -41,5 +40,10 @@ public class Order {
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
 	}
-
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
 }

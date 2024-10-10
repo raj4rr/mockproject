@@ -2,9 +2,8 @@ package com.order.request;
 
 import com.order.entity.Order;
 import com.order.model.Payment;
-
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
@@ -24,7 +23,5 @@ public class TransactionRequest {
 	public void setPayment(Payment payment) {
 		this.payment = payment;
 	}
-	
-	
 
 }

@@ -24,8 +24,8 @@ public class OrderService {
 		Payment payment = transactionRequest.getPayment();
 		payment.setAmmount(order.getTotalPrice());
 		payment.setOrderId(order.getId());
-		//
-		Payment paymentResponse = res.postForObject("http://localhost:8088/payment/dopayment", payment, Payment.class);
+		// do Rest call to payment and pass the order id .
+		Payment paymentResponse = res.postForObject("http://payment/payment/dopayment", payment, Payment.class);
 		if (paymentResponse.getPaymentStatus().equals("Success"))
 			response = "Payment done";
 		else
@@ -39,7 +39,9 @@ public class OrderService {
 		return transactionResponse;
 
 	}
+	
+	//rePayment in case of payment failed ..from GUI 
 
-	// do Rest call to payment and pass the order id .
+	
 
 }
