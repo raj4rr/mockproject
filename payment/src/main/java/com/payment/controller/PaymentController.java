@@ -16,8 +16,9 @@ public class PaymentController {
 	private PaymentService paymentService;
 	
 	@PostMapping("/dopayment")
-	public Payment doPayment(@RequestBody Payment order) {
+	public Payment doPayment(@RequestBody Payment order) throws InterruptedException {
 		
+		//Thread.sleep(1000000000);
 		return paymentService.doPayment(order);
 	}
 

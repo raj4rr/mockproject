@@ -1,6 +1,9 @@
 package com.order.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -10,13 +13,19 @@ import com.order.repository.OrderRepository;
 import com.order.request.TransactionRequest;
 import com.order.response.TransactionResponse;
 
+
 @Service
+@RefreshScope
 public class OrderService {
 	@Autowired
 	OrderRepository orderRepository;
-
+   
 	@Autowired
+	@Lazy
 	RestTemplate res;
+	
+	@Value("${microservice.payment-service.endpoints.endpoint.uri}")
+	private String DO_PAYMENT_SERVICE_ENDPOINT_URL;
 
 	public TransactionResponse addOrder(TransactionRequest transactionRequest) {
 		String response = "";
@@ -25,7 +34,7 @@ public class OrderService {
 		payment.setAmmount(order.getTotalPrice());
 		payment.setOrderId(order.getId());
 		// do Rest call to payment and pass the order id .
-		Payment paymentResponse = res.postForObject("http://PAYMENT/payment/dopayment", payment, Payment.class);
+		Payment paymentResponse = res.postForObject(DO_PAYMENT_SERVICE_ENDPOINT_URL, payment, Payment.class);
 		if (paymentResponse.getPaymentStatus().equals("Success"))
 			response = "Payment done";
 		else
