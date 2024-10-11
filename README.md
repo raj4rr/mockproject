@@ -1,3 +1,11 @@
+Projects 
+1.Service Registry
+2.Service Configutrations
+3.Cloud API Gateway
+4.Order
+5.Payment 
+
+
 Eureka 
 http://localhost:8761/eureka
 
@@ -37,3 +45,8 @@ curl --location 'http://localhost:8989/payment/dopayment' \
     "orderId":"12"   ,
     "ammount":199
 }'
+
+
+Service config Repository :- https://github.com/raj4rr/config-server.git
+
+Hystrix applied at APIGate .
