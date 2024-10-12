@@ -1,5 +1,7 @@
 package com.order.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -14,8 +16,9 @@ import com.order.request.TransactionRequest;
 import com.order.response.TransactionResponse;
 
 
+
 @Service
-@RefreshScope
+//@RefreshScope
 public class OrderService {
 	@Autowired
 	OrderRepository orderRepository;
@@ -23,11 +26,13 @@ public class OrderService {
 	@Autowired
 	@Lazy
 	RestTemplate res;
-	
+	 private static final Logger logger = LoggerFactory.getLogger(OrderService.class);
+	 
 	@Value("${microservice.payment-service.endpoints.endpoint.uri}")
 	private String DO_PAYMENT_SERVICE_ENDPOINT_URL;
 
 	public TransactionResponse addOrder(TransactionRequest transactionRequest) {
+		logger.info("Order Service Called...");
 		String response = "";
 		Order order = transactionRequest.getOrder();
 		Payment payment = transactionRequest.getPayment();
@@ -39,12 +44,14 @@ public class OrderService {
 			response = "Payment done";
 		else
 			response = "Failed";
+		logger.info("Payment status..."+response);
 		TransactionResponse transactionResponse =new TransactionResponse();
 		transactionResponse.setMessage(response);
 		transactionResponse.setAmount(paymentResponse.getAmmount());
 		transactionResponse.setTransactionId(paymentResponse.getTransactionId());
 		order=orderRepository.save(order);
 		transactionResponse.setOrder(order);
+		
 		return transactionResponse;
 
 	}
