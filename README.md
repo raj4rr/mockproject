@@ -50,3 +50,5 @@ curl --location 'http://localhost:8989/payment/dopayment' \
 Service config Repository :- https://github.com/raj4rr/config-server.git
 
 Hystrix applied at APIGate .
+
+Added --Logger(SLPF4J), Zinpin ,MicroMeret Tracking bridge  brave (Sleuth befor Spring 3.0..)
